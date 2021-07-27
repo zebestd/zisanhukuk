@@ -1,0 +1,29 @@
+{% block content %}
+{%  include 'navbar.html' %}
+{% load crispy_forms_tags %}
+   
+ <h2> Referans Olun </h2>
+
+<form action="" id="HaberForm" enctype="multipart/form-data" method="POST" novalidate>
+
+    {% csrf_token %}
+
+    
+    {{form|crispy}}
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+  <br>
+  <div class="user-box">
+    <a href="#">
+<input class="btn login_btn" type="submit" name="Submit" value="Gonder">
+</a>
+</div>
+</form>
+</div>
+</div>
+{%  include 'footer.html' %}
+{% endblock content %}

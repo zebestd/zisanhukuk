@@ -1,0 +1,62 @@
+
+
+
+{% block content %}
+
+      {%  include 'navbar.html' %}
+
+                
+          
+           
+             
+    
+    <style>
+    
+    
+        img{
+          border-radius: 100px;
+          width: 150px;
+          height: auto;
+          align-items: center; 
+          padding: 10px;
+        }
+        .tea{
+            display: inline;
+            align-items: center; 
+            text-align: center;
+        }
+        
+            </style> 
+            
+          
+<div style="width: 710px; margin: 0 auto;">
+    <div class="bacon-blog-post bacon-shadow">
+              
+                               <a href="{{ habers.resim.url }}"> <img class="img-thumbnail" src="{{ habers.resim.url }}" alt="resim"> </a>
+                         
+                           <br>
+                              <h2> {{ habers.isim }}</h2>
+                            <br>
+                                
+                            {{ habers.aciklama }}
+<br>
+<br>
+{% if habers.dosya %}
+                            <a href="{{ habers.dosya.url }}">   {{ habers.dosya }} </a>
+                            
+                    {% endif %}
+                      </div>
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+                    <small> <a href="{% url 'haberguncelle' habers.id %}">Guncelle</a> </small> 
+                    <small> <a href="{% url 'habersil' habers.id %}">Sil</a> </small> 
+                    {% endif %}
+                            
+                           
+                          
+                         
+{%  include 'footer.html' %}
+{% endblock %}
+
+

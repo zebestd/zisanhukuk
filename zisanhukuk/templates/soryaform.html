@@ -1,0 +1,111 @@
+{% block content %}
+{% include "navbarsorya.html" %}
+
+{% load crispy_forms_tags %}
+
+
+
+<style>
+  input[type=text], select {
+
+    width:100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width:100%;
+    background-color: #700d0d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #790f0f;
+  }
+  
+ 
+  </style>
+
+
+
+
+
+        
+          
+          
+   
+         
+<hr>
+
+<div>
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-12">
+                <article class="blog-card">
+                  <div class="blog-card__background">
+                    <div class="card__background--wrapper">
+                      <div class="card__background--main" style="background-image: url('http://demo.yolotheme.com/html/motor/images/demo/demo_131.jpg');">
+                        <div class="card__background--layer"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="post block">
+                    <form method="POST">
+                      <div>
+                      
+                  {% csrf_token %}
+                  
+                  
+                  
+                      Isim : {{form.isim}}
+                      Soru: {{form.soru}}
+                      Kategori: {{form.kategori}}
+                      <br>
+                      Aciklama: {{form.aciklama}}
+                      <input type="submit" value="Soru Sor">
+                      </div>
+                      </form>
+                     
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          
+          <section class="detail-page">
+            <div class="container mt-5">
+              
+            </div>
+          </section>
+          <hr>
+        </div>
+              
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% include "footer.html" %}
+
+
+{% endblock %}

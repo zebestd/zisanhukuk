@@ -1,0 +1,152 @@
+
+
+
+    
+
+    
+
+    {%  include 'navbar.html' %}
+
+    
+
+    
+    
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    
+    
+    img{
+      border-radius: 100px;
+      width: 100px;
+      height: auto;
+    }
+    
+    
+        </style>
+
+
+
+
+
+
+
+<style>
+    .toros{
+        padding-left: 15%;
+    }
+</style>
+
+
+
+
+
+ <div class="toros">
+    Yorumlar
+    <br>
+          {% for i in yorum %}
+           
+              
+              
+                 
+ 
+        
+              <a href="{% url 'yorum' i.id%}">{{ i.id }} {{ i.isim }} {{i.eklenme_tarihi }}</a>
+             
+              <hr>
+              
+          
+          {% endfor %}
+        </div>
+      
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    {%  include 'footer.html' %}
+
+      
+    
+   
+     
+    
+    
+      
+    
+    
+      
+    
+    
+    
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    

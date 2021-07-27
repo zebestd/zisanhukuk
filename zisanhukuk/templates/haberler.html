@@ -1,0 +1,154 @@
+
+{% load static %}
+
+    
+
+    
+
+    {%  include 'navbarsorya.html' %}
+
+    
+
+    
+    
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    
+    
+    img{
+      border-radius: 100px;
+      width: 100px;
+      height: auto;
+    }
+    
+    
+        </style>
+
+
+
+
+
+<style>
+    .toros{
+        padding-left: 15%;
+    }
+</style>
+
+
+
+
+
+   <h3 style="padding-top:2%; text-align:center;"> Haberler</h3>
+    <br>
+    <div class="toros">
+
+ 
+          {% for i in haber %}
+           
+              
+              
+                 
+ 
+         
+              <a href="{% url 'haber' i.id%}"><img src="{{ i.resim.url }}"> {{ i.id }} {{ i.isim }} {{i.eklenme_tarihi }}</a>
+              {% if request.user.is_authenticated %}
+              <small> <a href="{% url 'haberguncelle' i.id %}">Guncelle</a> </small>
+              {% endif %}
+              <hr>
+              
+          
+          {% endfor %}
+        </div>
+      
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    {%  include 'footer.html' %}
+
+      
+    
+   
+     
+    
+    
+      
+    
+    
+      
+    
+    
+    
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    

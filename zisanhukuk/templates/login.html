@@ -1,0 +1,73 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>Giris</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	
+
+
+
+</head>
+<body>
+
+	<div class="login-box">
+    {%  include 'navbar.html' %}
+		<div class="title">
+					<h3 id="form-title">Admin Girisi</h3>
+					<br>
+				</div>
+				
+					<form method="POST" action="">
+						{% csrf_token %}
+						
+						<div class="user-box">
+							
+	
+								<input type="text" name="username" placeholder="Kullanici Adi..." class="form-control">
+							
+	
+						</div>
+
+						<div class="user-box">
+								
+							
+	
+									<input type="password" name="password" placeholder="Sifre..." class="form-control" >
+							
+						</div>
+
+						<div class="user-box">
+							<a href="/">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<div class="d-flex justify-content-center mt-3 login_container">
+										
+										<input class="btn login_btn" type="submit" value="Giris Yap">
+										
+									  </div>
+									</a>
+				   			</div>
+					</form>
+
+
+
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}			
+				<div class="uyeol">
+					 <a href="{% url 'reset_password' %}" class="ml-2">Sifremi unuttum</a>
+					</div>
+				
+					
+			</div>
+            {%  include 'footer.html' %}		
+</body>
+
+</html>

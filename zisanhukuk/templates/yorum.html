@@ -1,0 +1,59 @@
+
+
+
+{% block content %}
+
+{%  include 'navbar.html' %}
+
+          
+    
+     
+       
+
+<style>
+
+
+  img{
+    border-radius: 100px;
+    width: 150px;
+    height: auto;
+    align-items: center; 
+    padding: 10px;
+  }
+  .tea{
+      display: inline;
+      align-items: center; 
+      text-align: center;
+  }
+  
+      </style> 
+      
+    
+<div style="width: 710px; margin: 0 auto;">
+<div class="bacon-blog-post bacon-shadow">
+        
+                         <a href="{{ yorums.resim.url }}"> <img class="img-thumbnail" src="{{ yorums.resim.url }}" alt="resim"> </a>
+                   
+                     <br>
+                        <h2> {{ yorums.isim }}</h2>
+                      <br>
+                          
+                      {{ yorums.aciklama }}
+<br>
+<br>
+{% if yorums.dosya %}
+                      <a href="{{ yorums.dosya.url }}">   {{ yorums.dosya }} </a>
+                      
+              {% endif %}
+                </div>
+              </div>
+
+           
+                      
+                     
+                    
+                   
+{%  include 'footer.html' %}
+{% endblock %}
+
+

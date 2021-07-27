@@ -1,0 +1,275 @@
+{% block content %}
+
+{% load static %}
+
+{% include "navbarsorya.html" %}
+
+
+<style>
+    .teateatea{
+    margin: 30px;
+    background-color: rgb(126, 14, 14);
+    color:white;
+    border-radius: 25px;
+    display: inline-block;
+    font-size: 25px;
+    width: 200px;
+    text-align: center;
+    letter-spacing: -.2px; 
+    text-decoration: none; 
+
+    }
+    .teateatea:hover{
+    background-color:rgb(177, 23, 23)
+    }
+</style>
+          
+   
+<div class="teateatea">
+    <a href="{% url 'create_soru' %}" style="color:white; text-decoration: none; display: block;"> Soru Sor </a>
+    </div>
+
+
+
+<style> 
+.yukari{
+  margin-top:-5.5%;
+}
+</style>
+
+
+        
+<style>
+  input[type=text], select {
+
+    width:100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width:100%;
+    background-color: #700d0d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #790f0f;
+  }
+  
+ .hover{
+   word-wrap: break-word;
+   word-break: break-all;
+ }
+  </style>
+          
+   
+         
+
+
+<div class="yukari hover">
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-12">
+                <article class="blog-card">
+                  <div class="blog-card__background">
+                    <div class="card__background--wrapper">
+                      <div class="card__background--main" style="background-image: url('http://demo.yolotheme.com/html/motor/images/demo/demo_131.jpg');">
+                        <div class="card__background--layer"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="post block">
+                    <h2 style="font-size:17px;">
+                    <b> {{ quest.isim }} </b> </h2>
+                    <br>
+                    <h2 style="font-size:17px;"><a href="" class="icon-link mr-3"><i class="fa fa-pencil-square-o"></i>  {{ quest.soru }} </a></h2>
+                 
+                    <br>
+               
+                    <h2 style="font-size:17px;"> {{ quest.aciklama }} </h2>
+                  
+                  <div class="blog-card__info">
+                 <h2 style="font-size:17px;">  <small> Sorulma tarihi: {{ quest.date_added }} </small> </h2>
+
+                 
+                 <h4 style="font-size:17px;"><a href="#home_section">Soruyu Yanitla</a></h4> 
+              </div>
+              </div>
+              <hr>
+              <h4 class="subtitle" style="font-size:17px;">{{answers.count}} Yanit</h4> 
+                  <hr>
+              
+                 
+                
+             
+                  {% for comment in answers %}
+                      <article class="media">
+                          <div class="media-content">
+                              <div class="content">
+                                  <p>
+                                     <h4 style="font-size:17px;"> <strong>{{ comment.isim }}</strong>  
+                                      <br>
+                                     
+                                      <small style="font-size:17px;">{{ comment.date_added }}</small>
+                                      <br>
+                                      {{ comment.yanit }}
+                                    </h4>
+                                  </p>
+                              
+                                  <hr>
+                                  
+                              </div>
+                          </div>
+                          
+                      </article>
+  
+
+
+
+                      
+                  {% endfor %}
+              
+
+
+
+                  
+                  {% if request.user.is_authenticated %}
+                  <section id="home_section">
+                  <h2 class="subtitle">Soruyu Yanitla</h2>
+              
+                  <form method="post" action="">
+                      {% csrf_token %}
+              
+                      {{ form.as_p }}
+              
+                      <div class="field">
+                          <div class="control">
+                              <input type="submit" class="button is-success" value="Yanitla">
+                          </div>
+                      </div>
+                  </form>
+                  </section>
+{% endif %}
+
+                  <br>
+                <!--  <h3 class="card-text"><a href="/tag/{{quest.kategori}}">{{quest.kategori }} kategorisindeki benzer sorular icin tiklayin </a></h3> 
+                  <br> -->
+                  <h3 class="card-text" style="font-size:17px;"><a href="/soru/?q={{quest.soru}}">Bu soruya benzer sorular icin tiklayin </a></h3>
+
+                
+
+                     
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          
+          <section class="detail-page">
+            <div class="container mt-5">
+              
+            </div>
+          </section>
+          <hr>
+        </div>
+               
+       
+
+   
+      
+        <script>
+          $(document).ready(function(){
+              $(".save-comment").on('click',function(){
+                  var _answerid=$(this).data('answer');
+                  var _comment=$(".comment-text-"+_answerid).val();
+                  // Ajax
+                  $.ajax({
+                      url:"/save-comment",
+                      type:"post",
+                      data:{
+                          comment:_comment,
+                          answerid:_answerid,
+                          csrfmiddlewaretoken:"{{csrf_token}}"
+                      },
+                      dataType:'json',
+                      beforeSend:function(){
+                          $(".save-comment").addClass('disabled').text('saving...');
+                      },
+                      success:function(res){
+                          if(res.bool==true){
+                              $(".comment-text-"+_answerid).val('');
+                              // Append Element
+                              var _html='<div class="card mb-2 animate__animated animate__bounce">\
+                              <div class="card-body">\
+                                  <p>'+_comment+'</p>\
+                                  <p>\
+                                      <a href="#">{{request.user}}</a>\
+                                  </p>\
+                              </div>\
+                          </div>';
+                          $(".comment-wrapper-"+_answerid).append(_html);
+                          var prevCount=$(".comment-count-"+_answerid).text();
+                          $(".comment-count-"+_answerid).text(parseInt(prevCount)+1);
+                          }
+                          $(".save-comment").removeClass('disabled').text('Submit');
+                      }
+                  });
+              });
+      
+              // Upvote
+              $(".upvote-click").on('click',function(){
+                  var answerid=$(this).data('answer');
+                  // Ajax
+                  $.ajax({
+                      url:"/save-upvote",
+                      type:"post",
+                      data:{
+                          answerid:answerid,
+                          csrfmiddlewaretoken:"{{csrf_token}}"
+                      },
+                      dataType:'json',
+                      success:function(res){
+                          var _prevupvote=$(".upvote-count-"+answerid).text();
+                          if(res.bool==true){
+                              $(".upvote-count-"+answerid).text(parseInt(_prevupvote)+1);
+                          }
+                      }
+                  });
+              });
+      
+              // Downvote
+              $(".downvote-click").on('click',function(){
+                  var answerid=$(this).data('answer');
+                  // Ajax
+                  $.ajax({
+                      url:"/save-downvote",
+                      type:"post",
+                      data:{
+                          answerid:answerid,
+                          csrfmiddlewaretoken:"{{csrf_token}}"
+                      },
+                      dataType:'json',
+                      success:function(res){
+                          var _prevupvote=$(".downvote-count-"+answerid).text();
+                          if(res.bool==true){
+                              $(".downvote-count-"+answerid).text(parseInt(_prevupvote)+1);
+                          }
+                      }
+                  });
+              });
+          });
+      </script>
+ 
+
+
+ {% include "footer.html" %}
+{% endblock %}
+
+
+
